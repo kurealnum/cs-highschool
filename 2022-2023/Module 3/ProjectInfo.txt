@@ -1,0 +1,14 @@
+First American financial corporation data breach, 2019
+
+1. First American Financial (Wrong: First American, Americans Institution, First Financial)
+2. May 2019 (Wrong: June 2019, September 2019, January 2019)
+3. When someone stumbled on an old website configuration error (Wrong: When a hacker broke into the website, When the CEO released everyones personal data, When the websites database sent everyone's password to the President)
+4. Their customers (Wrong: The CEO, Their employees, Their customers parents)
+5. Scans of documents (Wrong: Nuclear launch codes, Passwords to their employees gmail, Pictures of license plates)
+6. No compensation (Wrong: A free car, A cash bonus, A plot of land)
+7. The company used the data for their own purposes (Wrong: Nobody; there was no reason to have the data, The customers were allowed to read through it, The company sold the information as books, for entertainment)
+8. Nobody is suspected to have stolen anything (Wrong: Everything was stolen, Hackers got away with half of the total data, The employees took most of it.)
+9. This had little to no effect on the economy (Wrong: This caused the Great Depression, Inflation went down, The company was fined 300 thousand dollars)
+10. They were not (Wrong: They swayed the next election, This caused WWIII, Multiple laws were changed)
+
+Sources: https://teampassword.com/blog/the-first-american-corporation-data-leak-what-happened, https://news.bloomberglaw.com/banking-law/first-american-financial-ditches-suit-stemming-from-data-breach
