@@ -1,0 +1,26 @@
+'''Oscar Gaske, Midterm 2022'''
+
+global_score = 0
+questions_list = ["What orginization had a data breach?\n1. First American\n2. First American Financial\n3. Americans Institution\n4. First Financial\n: ",
+"When did the breach occur?\n1. June 2019\n2. September 2019\n3. January 2019\n4. May 2019\n: ",
+"How was the breach identified?\n1. When a hacker broke into the website\n2. When the CEO released everyone's personal data\n3. When someone stumbled on an old website configuration error\n4. When the websites database sent everyone's password to the President\n: ",
+"Who had their person information exposed by the breach?\n1. Their customers\n2. The CEO\n3. Their employees\n4. Their customers parents\n: ",
+"What personal info was exposed?\n1. Nuclear launch codes\n2. Passwords to their employees email\n3. Scans of documents\n4. Pictures of license plates\n: ",
+"What kind of compensation did the exposed recieve?\n1. A free car\n2. Nothing\n3. A cash bonus\n4. A plot of land\n: ",
+"Who benefited from the data before the breach?\n1. Nobody; there was no reason to have the data\n2. The customers liked to read through it sometimes\n3. They sold the information\n4. The company used the data for their own purposes\n: ",
+"Who benefited from the data because of the reach?\n1. Nobody is suspected to have stolen anything\n2. Everything was stolen\n3. Hackers got away with over half of the total data\n4. The employees took most of it\n: ",
+"How was the economy affected?\n1. This caused the Great Depression\n2. Inflation went down\n3. This had no effect on the economy\n4. The company was fined 300 thousand dollars\n: ",
+"How were politics or law affected?\n1. They may of swayed the next election\n2. They were not\n3. This caused WWIII\n4. Multiple laws were changed \n: "]
+answers_list = [2, 4, 3, 1, 3, 2, 4, 1, 3, 2]
+
+#Score calculating function
+def check_answer(score, correct_answer):
+    global global_score
+    global_score+=1 if score == correct_answer else 0
+    
+print("The company we are looking at is the First American financial corp, who had a data breach in 2019\nCorrect answers are stored in a .txt file (not pulled from, they're just there for the user to read if they wish)\nChoose 1-4 for each answer.")
+for i in range(len(questions_list)):
+    temp_var = int(input(questions_list[i]))
+    check_answer(temp_var, answers_list[i])
+
+print(f'Your final score is {global_score}/10!\nSources:\nhttps://news.bloomberglaw.com/banking-law/first-american-financial-ditches-suit-stemming-from-data-breach\nhttps://teampassword.com/blog/the-first-american-corporation-data-leak-what-happened')
