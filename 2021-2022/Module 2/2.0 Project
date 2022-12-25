@@ -1,0 +1,40 @@
+#Oscar G
+import random
+
+def age_custom_citizen_test(current_age, citizenship):
+    print(f'Age of person is {current_age}')
+    if(current_age >= 18 and custom_citizen):
+        print(f'The {current_age} year old can vote and drive!')
+    elif(custom_citizen == False and current_age >= 18):
+        print(f'The {current_age} year old can\'t vote yet, but they can get a drivers license!')
+    elif(current_age < 18 and current_age >= 16):
+        print(f'Sorry, {current_age} year old. You can\'t vote yet, but you can drive!')
+    elif(custom_citizen and current_age < 18 and current_age >= 16):
+        print(f'{current_age} can\'t vote yet, although they are a custom_citizen!, and they can drive!')
+    elif(custom_citizen == False or custom_citizen and current_age < 16):
+        print(f'{current_age} is way too young to vote or drive!')
+
+
+custom_age = int(input("How old is he/she: "))
+custom_citizen = bool(input("Are they a custom_citizen? (True or False) "))
+
+age_custom_citizen_test(custom_age, custom_citizen)
+
+#Just commenting this out, because I really like the code I wrote
+
+'''
+for i in range(1,len(age_list)+1):
+    select_list += 1
+    custom_citizenship = random.randint(1,2)
+    if(custom_citizenship == 1):
+        custom_citizen = False
+    elif(custom_citizenship == 2):
+        custom_citizen = True
+    the_current_age = age_list[select_list]
+    if custom_citizen:
+        print('The current person is a custom_citizen')
+        age_custom_citizen_test(the_current_age)
+    else:
+        print('The current person is NOT a custom_citizen')
+        age_custom_citizen_test(the_current_age)
+'''
