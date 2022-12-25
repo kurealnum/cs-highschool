@@ -1,0 +1,65 @@
+body {
+  background-color:#1c1326;
+  max-width: 1920px;
+  border-top: 5px solid #24182f;
+  border-right: 5px solid #24182f;
+  border-bottom: 5px solid #24182f;
+  border-left: 5px solid #24182f;
+  padding: 15px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+}
+
+nav {
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: white;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+footer {
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: white;
+  font-size: 18px;
+}
+
+.container {
+   display: flex;
+   flex-flow: row wrap;
+   justify-content: center;
+   align-items: stretch;
+   color: white;
+   text-align: center;
+}
+
+h3 {
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+p1 {
+  font-size: 27px;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+}
+
+img {
+  display: block;
+  background-color: white;
+  padding: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
