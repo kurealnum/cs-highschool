@@ -23,7 +23,17 @@ with open('greenhouse_gas_inventory_data_data.csv', mode='r') as data:
     csv_file = sorted(csv_file, key=lambda x: x[2])
 
 
-#returns the different types of emissions in this dataset
+'''
+Docs for route info is in the README!
+This route is kind of a special case, 
+it's the shortened README for the API
+'''
+@app.route("/", methods=['GET'])
+@cache.cached(timeout=60)
+def home_and_help():
+    pass
+
+
 @app.route("/types_of_emissions", methods=['GET'])
 @cache.cached(timeout=60)
 def types_of_emissions():
@@ -44,10 +54,6 @@ def types_of_emissions():
     return return_statement
 
 
-'''
-returns all of the countries included in this dataset, sorted by amount of pollution
-in a certain year, and a certain type of pollution!
-'''
 @app.route("/countries/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
 @cache.cached(timeout=60)
 def countries(sort_method, type_of_pollution, year):
@@ -75,7 +81,7 @@ def countries(sort_method, type_of_pollution, year):
     return return_statement
 
 
-@app.route("/all_countries")
+@app.route("/all_countries", methods=['GET'])
 @cache.cached(timeout=60)
 def all_countries():
     return_statement = []
@@ -87,5 +93,23 @@ def all_countries():
     return_statement = jsonify(json.dumps({"all_countries": list(set(return_statement))}))
 
     return return_statement
+
+
+@app.route("/years_supported", methods=['GET'])
+@cache.cached(timeout=60)
+def years_supported():
+    pass
+
+
+@app.route("/h_l_polluting_countries/<string:h_or_l>", methods=['GET'])
+@cache.cached(timeout=60)
+def most_polluting_countries():
+    pass
+
+
+@app.route("/difference_in_pollution/<string:country>/<string:years>")
+@cache.cached(timeout=60)
+def difference_in_pollution():
+    pass
 
 
