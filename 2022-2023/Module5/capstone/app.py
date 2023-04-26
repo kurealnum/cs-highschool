@@ -39,14 +39,14 @@ def types_of_emissions():
     the list into a dictionary, and jsonifying said dictionary
     I'll probably use this again a lot, so if you see another hot mess, it's probably this
     '''
-    return_statement = jsonify({"types": list(set(return_statement))})
+    return_statement = jsonify(json.dumps({"types": list(set(return_statement))}))
 
     return return_statement
 
 
 '''
 returns all of the countries included in this dataset, sorted by amount of pollution
-sort_method allows you to sort countries by ascending or descending
+in a certain year, and a certain type of pollution!
 '''
 @app.route("/countries/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
 @cache.cached(timeout=60)
@@ -69,9 +69,23 @@ def countries(sort_method, type_of_pollution, year):
     return_statement = dict(return_statement)
     
     #did i struggle trying to find out why this was sorting my keys for 6 hours? yes, yes i did
-    return_statement = json.dumps({"countries": return_statement,
-                                    "type_of_pollution": type_of_pollution}, sort_keys=False)
+    return_statement = jsonify(json.dumps({"countries": return_statement,
+                                    "type_of_pollution": type_of_pollution}, sort_keys=False))
    
+    return return_statement
+
+
+@app.route("/all_countries")
+@cache.cached(timeout=60)
+def all_countries():
+    return_statement = []
+
+    #start at index 1 so we don't pick up the headers
+    for i in csv_file[1:]:
+        return_statement.append(i[0])
+    
+    return_statement = jsonify(json.dumps({"all_countries": list(set(return_statement))}))
+
     return return_statement
 
 
