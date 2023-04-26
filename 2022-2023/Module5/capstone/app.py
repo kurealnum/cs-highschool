@@ -1,11 +1,16 @@
 #imports
 import csv
 from flask import Flask, jsonify
+from flask_caching import Cache
 
 #some basic info to give flask
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config["SESSION_PERMANENT"] = False
 
+#cache setup
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+
+#get the csv_file
 with open('greenhouse_gas_inventory_data_data.csv', mode='r') as data:
     #word to the wise; don't print this out on replit
     data = csv.reader(data)
@@ -17,6 +22,7 @@ with open('greenhouse_gas_inventory_data_data.csv', mode='r') as data:
 
 
 @app.route("/types_of_emissions", methods=['GET'])
+@cache.cached(timeout=60)
 def types_of_emissions():
     #jsonify this
     return_statement = []

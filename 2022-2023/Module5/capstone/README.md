@@ -62,6 +62,6 @@ Make sure I'm returning the right information
 
 Make sure/make the API compliant with REST architecture
 -Figure out caching w/ Flask/Flask modules
--Uniform interface is easy, HATEOAS is not
+-For HATEOAS (part of uniform interface), I just need to come back and provide references to related endpoints in my json returns
 -That's really all I have to go out of my way to do
  
