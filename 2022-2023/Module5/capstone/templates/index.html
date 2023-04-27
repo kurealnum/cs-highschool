@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GreenhouseGasesAPI</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" type="text/css">
+</head>
+
+<body>
+    <h2>/: </h2>
+    <p>Returns what is basically the home page, I.E. the index, help page, ect. Displays basic info on the API. There
+        are URIs listed everywhere, just for a helping hand!</p>
+    <p2><em>/ (Just the index)</em></p2>
+
+    <h2>/api/all_countries: </h2>
+    <p>Returns all the countries supported/shown in this dataset. URI should look like this:</p>
+    <p2><em>/api/all_countries</em></p2>
+
+    <h2>/api/avg_of_pollution: </h2>
+    <p>Returns the average amount of pollution from all countries, for a certain kind of pollution, in a certain year.
+        URI should look like this:
+    </p>
+    <p2><em>/api/avg_of_pollution/carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent/2010</em></p2>
+
+    <h2>/api/years_supported: </h2>
+    <p>Returns the years supported in the dataset. URI should look like this:</p>
+    <p2><em>/api/years_supported</em></p2>
+
+    <h2>/api/types_of_emissions: </h2>
+    <p>Returns the types of emissions that this dataset contains. URI should look like this:</p>
+    <p2><em>/api/types_of_emissions</em></p2>
+
+    <h2>/api/pollution_info: </h2>
+    <p>Returns the amount of pollution for each country, with the option to sort by "amount" of pollution in either
+        ascending or descending. URI should look something like:
+    </p>
+    <p2><em>/api/pollution_info/asc/carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent/2010</em></p2>
+
+    <h2>/api/h_l_polluting_countries: </h2>
+    <p>Returns the highest or lowest polluting country for a certain year. URI should look like this:
+    </p>
+    <p2><em>/api/h_l_polluting_countries/lowest/carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent/2000</em></p2>
+
+    <h2>/api/difference_in_pollution: </h2>
+    <p>Returns the difference in pollution across a period of time for a certain country. Make sure years are in
+        ascending order (i.e. 2000-2010, not 2010-2000). Also, note that the return value is the difference between the
+        newest value and the oldest value. If it returns 0, you probably typed something in wrong.
+        URI should look like this:
+    </p>
+    <p2><em>/api/difference_in_pollution/Australiacarbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kiotonne_co2_equivalent/2010-2012</em></p2>
+</body>
+
+</html>

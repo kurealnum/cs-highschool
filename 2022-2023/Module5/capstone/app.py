@@ -1,6 +1,6 @@
 #imports
 import csv, json
-from flask import Flask, jsonify
+from flask import Flask, render_template, jsonify
 from flask_caching import Cache
 from helpers import get_country_by_all, country_pollution_level
 
@@ -40,10 +40,10 @@ All of the required endpoints:
 @app.route("/", methods=['GET'])
 @cache.cached(timeout=60)
 def index():
-    pass
+    return render_template('index.html')
 
 
-@app.route("/all_countries", methods=['GET'])
+@app.route("/api/all_countries", methods=['GET'])
 @cache.cached(timeout=60)
 def all_countries():
     #jsonify this
@@ -63,19 +63,22 @@ def all_countries():
     return return_statement
 
 
-@app.route("/avg_of_pollution/<string:type_of_pollution>/<string:year>", methods=['GET'])
+@app.route("/api/avg_of_pollution/<string:type_of_pollution>/<string:year>", methods=['GET'])
 @cache.cached(timeout=60)
 def avg_of_pollution(type_of_pollution, year):
     return_statement = country_pollution_level(csv_file, type_of_pollution, year)
 
+    #returns the average pollution                       average calculation here ^^
+    return jsonify(json.dumps({"avg_of_pollution": sum(return_statement.values())/len(return_statement.values())}))
 
-@app.route("/years_supported", methods=['GET'])
+
+@app.route("/api/years_supported", methods=['GET'])
 @cache.cached(timeout=60)
 def years_supported():
     return jsonify(json.dumps({"years": "1990-2014"}))
 
 
-@app.route("/types_of_emissions", methods=['GET'])
+@app.route("/api/types_of_emissions", methods=['GET'])
 @cache.cached(timeout=60)
 def types_of_emissions():
     return_statement = []
@@ -95,7 +98,7 @@ Not required endpoints:
 '''
 
 
-@app.route("/pollution_info/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
+@app.route("/api/pollution_info/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
 @cache.cached(timeout=60)
 def countries(sort_method, type_of_pollution, year):
     #deciding which sort method to use
@@ -117,7 +120,7 @@ def countries(sort_method, type_of_pollution, year):
     return return_statement
         
 
-@app.route("/h_l_polluting_countries/<string:h_or_l>/<string:type_of_pollution>/<string:year>", methods=['GET'])
+@app.route("/api/h_l_polluting_countries/<string:h_or_l>/<string:type_of_pollution>/<string:year>", methods=['GET'])
 @cache.cached(timeout=60)
 def h_l_polluting_countries(h_or_l, type_of_pollution, year):
     
@@ -133,7 +136,7 @@ def h_l_polluting_countries(h_or_l, type_of_pollution, year):
         return jsonify(json.dumps(dict_min))
 
 
-@app.route("/difference_in_pollution/<string:country>/<string:type_of_pollution>/<string:years>", methods=['GET'])
+@app.route("/api/difference_in_pollution/<string:country>/<string:type_of_pollution>/<string:year>", methods=['GET'])
 @cache.cached(timeout=60)
 def difference_in_pollution(country, type_of_pollution, year):
     years = year.rsplit("-")
