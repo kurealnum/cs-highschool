@@ -54,13 +54,13 @@ def types_of_emissions():
     return return_statement
 
 
-@app.route("/countries/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
+@app.route("/pollution_info/<string:sort_method>/<string:type_of_pollution>/<string:year>", methods=["GET"])
 @cache.cached(timeout=60)
 def countries(sort_method, type_of_pollution, year):
     #deciding which sort method to use
-    if str(sort_method).lower() == "asc":
+    if str(sort_method) == "asc":
         sort_method = False
-    elif str(sort_method).lower() == "desc":
+    elif str(sort_method) == "desc":
         sort_method = True
 
     return_statement = {}
@@ -98,16 +98,27 @@ def all_countries():
 @app.route("/years_supported", methods=['GET'])
 @cache.cached(timeout=60)
 def years_supported():
-    pass
+    return jsonify(json.dumps({"years": "1990-2014"}))
+        
 
-
-@app.route("/h_l_polluting_countries/<string:h_or_l>", methods=['GET'])
+@app.route("/h_l_polluting_countries/<string:h_or_l>/<string:type_of_pollution>/<string:year>", methods=['GET'])
 @cache.cached(timeout=60)
-def most_polluting_countries():
-    pass
+def h_l_polluting_countries(h_or_l, type_of_pollution, year):
+    return_statement = {}
 
+    #put countries that match users request into a dict, country as key
+    for i in csv_file[1:]:
+        if year == i[1] and type_of_pollution == i[3]:
+            return_statement.update({i[0]:float(i[2])})
 
-@app.route("/difference_in_pollution/<string:country>/<string:years>")
+    if h_or_l == "highest":
+        dict_max = {max(return_statement, key=return_statement.get):max(return_statement.values())}
+        return jsonify(json.dumps(dict_max))
+    else:
+        dict_min = {min(return_statement, key=return_statement.get):min(return_statement.values())}
+        return jsonify(json.dumps(dict_min))
+
+@app.route("/difference_in_pollution/<string:country>/<string:type_of_pollution>/<string:years>", methods=['GET'])
 @cache.cached(timeout=60)
 def difference_in_pollution():
     pass
