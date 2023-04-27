@@ -2,6 +2,7 @@
 import csv, json
 from flask import Flask, jsonify
 from flask_caching import Cache
+from helpers import get_country_by_all
 
 #some basic info to give flask
 app = Flask(__name__, template_folder='templates', static_folder='static')
@@ -111,16 +112,25 @@ def h_l_polluting_countries(h_or_l, type_of_pollution, year):
         if year == i[1] and type_of_pollution == i[3]:
             return_statement.update({i[0]:float(i[2])})
 
+    #if the user requested the highest, return the highest polluter for that year, along with how much pollution
     if h_or_l == "highest":
         dict_max = {max(return_statement, key=return_statement.get):max(return_statement.values())}
         return jsonify(json.dumps(dict_max))
+    #do the same if the user selected lower
     else:
         dict_min = {min(return_statement, key=return_statement.get):min(return_statement.values())}
         return jsonify(json.dumps(dict_min))
 
+
 @app.route("/difference_in_pollution/<string:country>/<string:type_of_pollution>/<string:years>", methods=['GET'])
 @cache.cached(timeout=60)
-def difference_in_pollution():
-    pass
+def difference_in_pollution(country, type_of_pollution, years):
+    years = years.rsplit("-")
+
+    #oldest is the oldest value, newest is the newest value
+    oldest = get_country_by_all(csv_file, country, years[0], type_of_pollution)
+    newest = get_country_by_all(csv_file, country, years[1], type_of_pollution)
+
+    return jsonify(json.dumps({country: newest-oldest}))
 
 

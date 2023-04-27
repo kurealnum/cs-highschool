@@ -12,7 +12,8 @@
 
 /h_l_polluting_countries: Returns the highest or lowest polluting country for a certain year. URI should look like this: /h_l_polluting_countries/lowest/carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent/2000
 
-/difference_in_pollution: Returns the difference in pollution across a period of time for a certain country
+/difference_in_pollution: Returns the difference in pollution across a period of time for a certain country. Make sure years are in ascending order (i.e. 2000-2010, not 2010-2000). Also, note that the return value is the difference between the newest value and the oldest value. If it returns 0, you probably typed something in wrong.
+URI should look like this: /difference_in_pollution/Australiacarbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kiotonne_co2_equivalent/2010-2012
 
 # Overview
 Hi there! This is a school project that will likely be to the scale of my personal projects. Let me paste everything in the project description, so we can better understand what I'm talking about
