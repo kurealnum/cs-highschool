@@ -11,6 +11,11 @@ app.config["SESSION_PERMANENT"] = False
 #cache setup
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
+#links to comply with HATEOAS (Hypermedia as the Engine of Application State)
+links = {"links": {"kaggle": "https://www.kaggle.com/datasets/unitednations/international-greenhouse-gas-emissions",
+                   "united_nations": "https://www.un.org/en/",
+                   "undata": "https://data.un.org"}}
+
 #get the csv_file
 with open('greenhouse_gas_inventory_data_data.csv', mode='r') as data:
     #word to the wise; don't print this out on replit
@@ -35,7 +40,7 @@ the years supported, but not the *entire* column.
 
 All of the required endpoints:
 '''
-
+ 
 
 @app.route("/", methods=['GET'])
 @cache.cached(timeout=60)
@@ -58,7 +63,10 @@ def all_countries():
     the list into a dictionary, and jsonifying said dictionary
     I'll probably use this again a lot, so if you see another hot mess, it's probably this
     '''
-    return_statement = jsonify(json.dumps({"all_countries": list(set(return_statement))}))
+
+    return_statement = {"all_countries": list(set(return_statement))}
+    return_statement.update(links)
+    return_statement = jsonify(json.dumps(return_statement))
 
     return return_statement
 
@@ -67,15 +75,20 @@ def all_countries():
 @cache.cached(timeout=60)
 def avg_of_pollution(type_of_pollution, year):
     return_statement = country_pollution_level(csv_file, type_of_pollution, year)
+    return_statement = {"avg_of_pollution": sum(return_statement.values())/len(return_statement.values())}
+    return_statement.update(links)
 
     #returns the average pollution                       average calculation here ^^
-    return jsonify(json.dumps({"avg_of_pollution": sum(return_statement.values())/len(return_statement.values())}))
+    return jsonify(json.dumps(return_statement))
 
 
 @app.route("/api/years_supported", methods=['GET'])
 @cache.cached(timeout=60)
 def years_supported():
-    return jsonify(json.dumps({"years": "1990-2014"}))
+    return_statement = {"years": "1990-2014"}
+    return_statement.update(links)
+
+    return jsonify(json.dumps(return_statement))
 
 
 @app.route("/api/types_of_emissions", methods=['GET'])
@@ -87,9 +100,10 @@ def types_of_emissions():
     for i in csv_file[1:]:
         return_statement.append(i[3])
     
-    return_statement = jsonify(json.dumps({"types": list(set(return_statement))}))
+    return_statement = {"types": list(set(return_statement))}
+    return_statement.update(links)
 
-    return return_statement
+    return jsonify(json.dumps(return_statement))
 
 
 '''
@@ -114,10 +128,10 @@ def countries(sort_method, type_of_pollution, year):
     return_statement = dict(return_statement)
     
     #did i struggle trying to find out why this was sorting my keys for 6 hours? yes, yes i did
-    return_statement = jsonify(json.dumps({"countries": return_statement,
-                                    "type_of_pollution": type_of_pollution}, sort_keys=False))
-   
-    return return_statement
+    return_statement = {"countries": return_statement, "type_of_pollution": type_of_pollution}
+    return_statement.update(links)
+
+    return jsonify(json.dumps(return_statement))
         
 
 @app.route("/api/h_l_polluting_countries/<string:h_or_l>/<string:type_of_pollution>/<string:year>", methods=['GET'])
@@ -129,10 +143,14 @@ def h_l_polluting_countries(h_or_l, type_of_pollution, year):
     #if the user requested the highest, return the highest polluter for that year, along with how much pollution
     if h_or_l == "highest":
         dict_max = {max(return_statement, key=return_statement.get):max(return_statement.values())}
+        dict_max.update(links)
+
         return jsonify(json.dumps(dict_max))
     #do the same if the user selected lower
     else:
         dict_min = {min(return_statement, key=return_statement.get):min(return_statement.values())}
+        dict_min.update(links)
+
         return jsonify(json.dumps(dict_min))
 
 
@@ -145,7 +163,10 @@ def difference_in_pollution(country, type_of_pollution, year):
     oldest = get_country_by_all(csv_file, country, years[0], type_of_pollution)
     newest = get_country_by_all(csv_file, country, years[1], type_of_pollution)
 
-    return jsonify(json.dumps({country: newest-oldest}))
+    return_statement = {country: newest-oldest}
+    return_statement.update(links)
+
+    return jsonify(json.dumps(return_statement))
 
 
 '''
