@@ -1,3 +1,5 @@
+#REST API, Oscar Gaske
+
 #imports
 import csv, json
 from flask import Flask, render_template, jsonify
