@@ -1,0 +1,3 @@
+RESTAPIenv/
+__pycache__/
+*.env
