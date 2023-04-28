@@ -1,3 +1,15 @@
-import requests
+import requests, os
 
-print(requests.get('http://127.0.0.1:5000/countries/desc/carbon_dioxide_co2_emissions_without_land_use_land_use_change_and_forestry_lulucf_in_kilotonne_co2_equivalent/2009').json())
+'''
+defining variables:
+
+I have this because i don't like developing on replit. 
+change this based on the platform the API is running on
+'''
+scheme_and_host_address = "http://127.0.0.1:5000"
+
+all_countries = requests.get(f"{scheme_and_host_address}/api/all_countries").json()
+years_supported = requests.get(f"{scheme_and_host_address}/api/years_supported").json()
+types_of_emissions = requests.get(f"{scheme_and_host_address}/api/types_of_emissions").json()
+
+

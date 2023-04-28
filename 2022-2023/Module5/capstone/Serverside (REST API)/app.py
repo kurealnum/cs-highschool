@@ -7,6 +7,7 @@ from helpers import get_country_by_all, country_pollution_level
 #some basic info to give flask
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config["SESSION_PERMANENT"] = False
+app.config['JSON_SORT_KEYS'] = False
 
 #cache setup
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
@@ -20,9 +21,10 @@ links = {"links": {"kaggle": "https://www.kaggle.com/datasets/unitednations/inte
 with open('greenhouse_gas_inventory_data_data.csv', mode='r') as data:
     #word to the wise; don't print this out on replit
     data = csv.reader(data)
-
     #will be a 2d array, just a massive one
     csv_file = []
+    #ditching the headers
+    headers = next(data)
     for row in data:
         csv_file.append(row)
 
@@ -55,7 +57,7 @@ def all_countries():
     return_statement = []
 
     #start at index 1 so we don't pick up the headers
-    for i in csv_file[1:]:
+    for i in csv_file:
         return_statement.append(i[0])
     
     '''
@@ -66,7 +68,7 @@ def all_countries():
 
     return_statement = {"all_countries": list(set(return_statement))}
     return_statement.update(links)
-    return_statement = jsonify(json.dumps(return_statement))
+    return_statement = jsonify(return_statement)
 
     return return_statement
 
@@ -79,16 +81,16 @@ def avg_of_pollution(type_of_pollution, year):
     return_statement.update(links)
 
     #returns the average pollution                  
-    return jsonify(json.dumps(return_statement))
+    return jsonify(return_statement)
 
 
 @app.route("/api/years_supported", methods=['GET'])
 @cache.cached(timeout=60)
 def years_supported():
-    return_statement = {"years": "1990-2014"}
+    return_statement = {"years_supported": "1990-2014"}
     return_statement.update(links)
 
-    return jsonify(json.dumps(return_statement))
+    return jsonify(return_statement)
 
 
 @app.route("/api/types_of_emissions", methods=['GET'])
@@ -103,7 +105,7 @@ def types_of_emissions():
     return_statement = {"types": list(set(return_statement))}
     return_statement.update(links)
 
-    return jsonify(json.dumps(return_statement))
+    return jsonify(return_statement)
 
 
 '''
@@ -131,7 +133,7 @@ def countries(sort_method, type_of_pollution, year):
     return_statement = {"countries": return_statement, "type_of_pollution": type_of_pollution}
     return_statement.update(links)
 
-    return jsonify(json.dumps(return_statement))
+    return jsonify(return_statement)
         
 
 @app.route("/api/h_l_polluting_countries/<string:h_or_l>/<string:type_of_pollution>/<string:year>", methods=['GET'])
@@ -145,13 +147,13 @@ def h_l_polluting_countries(h_or_l, type_of_pollution, year):
         dict_max = {max(return_statement, key=return_statement.get):max(return_statement.values())}
         dict_max.update(links)
 
-        return jsonify(json.dumps(dict_max))
+        return jsonify(dict_max)
     #do the same if the user selected lower
     else:
         dict_min = {min(return_statement, key=return_statement.get):min(return_statement.values())}
         dict_min.update(links)
 
-        return jsonify(json.dumps(dict_min))
+        return jsonify(dict_min)
 
 
 @app.route("/api/difference_in_pollution/<string:country>/<string:type_of_pollution>/<string:year>", methods=['GET'])
@@ -166,7 +168,7 @@ def difference_in_pollution(country, type_of_pollution, year):
     return_statement = {country: newest-oldest}
     return_statement.update(links)
 
-    return jsonify(json.dumps(return_statement))
+    return jsonify(return_statement)
 
 
 '''

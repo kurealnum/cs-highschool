@@ -1,3 +1,2 @@
 Flask
 Flask-Caching
-Openai
