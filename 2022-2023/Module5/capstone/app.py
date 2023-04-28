@@ -78,7 +78,7 @@ def avg_of_pollution(type_of_pollution, year):
     return_statement = {"avg_of_pollution": sum(return_statement.values())/len(return_statement.values())}
     return_statement.update(links)
 
-    #returns the average pollution                       average calculation here ^^
+    #returns the average pollution                  
     return jsonify(json.dumps(return_statement))
 
 
