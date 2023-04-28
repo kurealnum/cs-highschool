@@ -146,13 +146,13 @@ def h_l_polluting_countries(h_or_l, type_of_pollution, year):
 
     #if the user requested the highest, return the highest polluter for that year, along with how much pollution
     if h_or_l == "highest":
-        dict_max = {max(return_statement, key=return_statement.get):max(return_statement.values())}
+        dict_max = {"country": {max(return_statement, key=return_statement.get):max(return_statement.values())}}
         dict_max.update(links)
 
         return jsonify(dict_max)
     #do the same if the user selected lower
     else:
-        dict_min = {min(return_statement, key=return_statement.get):min(return_statement.values())}
+        dict_min = {"country": {min(return_statement, key=return_statement.get):min(return_statement.values())}}
         dict_min.update(links)
 
         return jsonify(dict_min)
@@ -167,7 +167,7 @@ def difference_in_pollution(country, type_of_pollution, year):
     oldest = get_country_by_all(csv_file, country, years[0], type_of_pollution)
     newest = get_country_by_all(csv_file, country, years[1], type_of_pollution)
 
-    return_statement = {country: newest-oldest}
+    return_statement = {"country":{country: newest-oldest}}
     return_statement.update(links)
 
     return jsonify(return_statement)
