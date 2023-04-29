@@ -1,7 +1,7 @@
 #REST API, Oscar Gaske
 
 #imports
-import csv, json
+import csv
 from flask import Flask, render_template, jsonify
 from flask_caching import Cache
 from helpers import get_country_by_all, country_pollution_level
