@@ -1,5 +1,4 @@
 import requests, time
-
 '''
 defining variables:
 
@@ -57,6 +56,9 @@ def main():
     print(f"Well... did (the) {highest_polluting_country} get any better at least? Let's check by checking the difference in pollution...\n")
     time.sleep(3)
     years = input(f"Can you provide 2 years to check in between? (ex. 1999-2007) Just a reminder, this dataset only supports these years: {years_supported['years_supported']} ")
+    if len(years.rsplit("-")) != 2:
+      print("Please correctly format the years next time! (ex. 1999-2007, 2009-2010)\n This time, I'm giving you default years instead.")
+      years = "1995-2000"
     time.sleep(3)
     difference_in_pollution = requests.get(f"{scheme_and_host_address}/api/difference_in_pollution/{highest_polluting_country}/{pollutant}/{years}").json()
 
