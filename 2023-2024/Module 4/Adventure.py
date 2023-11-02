@@ -1,9 +1,15 @@
+###################################################################
+# Oscar Gaske
 # Adventure.py
+# Text-based adventure game that takes you on a journey through a mystical land!
+# 11/2/23
+###################################################################
 
 
 def main():
     print("You find yourself standing at a crossroads. Which path will you choose?")
 
+    # loops until the user either quits, wins, or dies
     while True:
         print("\n1. Go left")
         print("2. Go right")
@@ -11,8 +17,10 @@ def main():
         print("4. Go back")
         print("5. Quit")
 
+        # choice input
         choice = input("Enter your choice (1/2/3/4/5): ")
 
+        # deciding where to go, with function calls
         if choice == "1":
             go_left()
         elif choice == "2":
@@ -27,6 +35,7 @@ def main():
             print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
 
 
+# function called if user chooses 1
 def go_left():
     print("\nYou chose to go left. You find yourself in a dark forest.")
     print("1. Explore the forest")
@@ -42,6 +51,7 @@ def go_left():
         print("Invalid choice. Please enter 1 or 2.")
 
 
+# function called if user chooses 2
 def go_right():
     print("\nYou chose to go right. You arrive at a beautiful meadow.")
     print("1. Have a picnic")
@@ -57,6 +67,7 @@ def go_right():
         print("Invalid choice. Please enter 1 or 2.")
 
 
+# function called if user chooses 3
 def go_straight():
     print("\nYou chose to go straight. You reach a riverbank.")
     print("1. Build a raft")
@@ -72,16 +83,20 @@ def go_straight():
         print("Invalid choice. Please enter 1 or 2.")
 
 
+# function called if user chooses 4
 def go_back():
     print("\nYou chose to go back to the crossroads.")
     main()
 
 
+# function called if user chooses 5
 def quit_game():
     print("Thanks for playing! Goodbye.")
     exit()
 
 
+##############################
+# a bunch of helper functions
 def explore_forest():
     print("\nYou explore the dark forest and discover a hidden treasure!")
     print("Congratulations, you win!")
@@ -100,6 +115,7 @@ def follow_hidden_path():
     print("1. Explore the village")
     print("2. Return to the meadow")
 
+    # user input for where to go
     choice = input("Enter your choice (1/2): ")
 
     if choice == "1":
@@ -130,5 +146,10 @@ def try_to_swim():
     quit_game()
 
 
+# end of helper functions
+###########################
+
+
+# driver code, just calling the main function
 if __name__ == "__main__":
     main()
