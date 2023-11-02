@@ -17,13 +17,13 @@ pyramid_height = 200
 pyramid_base_area = pyramid_base_length**2
 pyramid_slant_length = math.sqrt(((1/2 * pyramid_base_length) ** 2) + pyramid_height ** 2)
 
-# calculating the totalsurface area
+# calculating the total surface area, rounded to the 2nd decimal place
 pyramid_surface_area = round(pyramid_base_area + (0.5 * (4 * pyramid_base_length * pyramid_slant_length)), 2)
 
-# paint_cost per square foot
+# paint cost per square foot
 paint_cost = 1.32
 
-#total cost
+#total cost, rounded to the 2nd decimal place
 total_cost = round(pyramid_surface_area * 1.32, 2)
 
 #printing results
