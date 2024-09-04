@@ -5,6 +5,7 @@ public class DataTypes {
         Double doubleVariable = 6.5;
         Boolean trueOrFalse = true;
         String stringVar = "Hello";
+        Integer test = 4.6;
 
         // printing
         System.out.println("Integer Variable: " + integerVariable);
