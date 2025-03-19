@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Tester
+comment0.text=\r\n\ The\ ShoppingCart\ class\ has\ an\ ArrayList\ of\ Items.\ You\ will\ write\ a\ new\ class\r\n\ DiscountedItem\ that\ extends\ Item.\ This\ code\ is\ adapted\ from\r\n\ https\://practiceit.cs.washington.edu/problem/view/bjp4/chapter9/e10-DiscountBill\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+numComments=2
