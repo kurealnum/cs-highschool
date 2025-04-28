@@ -94,8 +94,33 @@ public class Unit7 {
             unsorted.set(i, unsorted.get(min_index));
             unsorted.set(min_index, tmp);
         }
-
         System.out.println(unsorted);
+
+        // insertion sort
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        arr.add(10);
+        arr.add(9);
+        arr.add(8);
+        arr.add(7);
+        arr.add(6);
+        arr.add(5);
+        arr.add(4);
+        arr.add(3);
+        arr.add(2);
+        arr.add(1);
+
+        for (int i = 1; i < arr.size(); i++) {
+            int j = i;
+            while (j > 0 && arr.get(j - 1) > arr.get(j)) {
+                int tmp = arr.get(j);
+                arr.set(j, arr.get(j - 1));
+                arr.set(j - 1, tmp);
+                j--;
+            }
+        }
+
+        System.out.println(arr);
     }
 
     // 7.5 Searching
